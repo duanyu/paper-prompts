@@ -7,7 +7,7 @@ A conversation between User and Assistant. The user asks a question, and the Ass
 ```
 
 ## Olmo3
-### Prompt for LLM Judge Reward
+### LLM Judge Prompt for Non-verifiable Tasks
 ```
 Please act as an impartial judge and evaluate the quality of the answer provided by an AI assistant to the conversation history leading up to the answer displayed below. Judge whether the provided answer is good by comparing it to the reference answer.
 Notes:
