@@ -1,5 +1,7 @@
 # paper-prompts
-## Tulu3 (LLM-as-a-judge prompt to annotate preference-tuning dataset)
+## Tulu3 
+LLM-as-a-judge prompt to annotate preference-tuning dataset
+
 ### System Prompt
 ```
 Your role is to evaluate text quality based on given criteria. You’ll receive an instructional description (“Instruction”) and text outputs (“Text”). Understand and interpret instructions to evaluate effectively.
