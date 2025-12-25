@@ -1,5 +1,40 @@
 # paper-prompts
-## Tulu3
+## Tulu3 (LLM-as-a-judge prompt to annotate preference-tuning dataset)
+### System Prompt
+```
+Your role is to evaluate text quality based on given criteria. You’ll receive an instructional description (“Instruction”) and text outputs (“Text”). Understand and interpret instructions to evaluate effectively.
+Provide annotations for each text with a rating and rationale. The texts given are independent, and should be evaluated separately.
+```
+
+### Formatting a preference instance for LLM-as-a-judge (Jinja2 template)
+```
+{ aspect_guideline }
+## Format:
+### Input
+Instruction: [Clearly specify the task goal and restrictions]
+Texts:
+{% for i in range(1, completions|length + 1) %}
+<text {{ i }}> [Text {{ i }}]
+{% endfor %}
+### Output
+{% for i in range(1, completions|length + 1) %}
+#### Output for Text {{ i }}
+{% if identifier is defined %}
+Type: [List of numeric identifiers (or "None"), separatedby commas]
+Rationale: [Rationale for identification in short sentences]
+{% endif %}
+Rating: [Rating for text {{ i }}]
+Rational: [rational for the rating in short sentences]
+{% endfor %}
+—
+## Annotation
+### Input Instruction: {{ instruction }}
+Texts: {% for completion in completions %}
+<text {{ loop.index + 1 }}> {{ completion }}
+{% endfor %}
+### Output
+```
+
 ### Instruction Following Aspect
 ```
 # Instruction Following Assessment
@@ -89,12 +124,6 @@ Scoring: Rate outputs 1 to 5 based on extent of hallucination:
 5. No Hallucination: Free of hallucinations.
 ```
 
-## DeepSeek R1
-### Template for DeepSeek-R1-Zero. prompt will be replaced with the specific reasoning question during training
-```
-A conversation between User and Assistant. The user asks a question, and the Assistant solves it. The assistant first thinks about the reasoning process in the mind and then provides the user with the answer. The reasoning process and answer are enclosed within <think> </think> and <answer> </answer> tags, respectively, i.e., <think> reasoning process here </think> <answer> answer here </answer>. User: prompt. Assistant:
-```
-
 ## Olmo3
 ### LLM Judge Prompt for Non-verifiable Tasks
 ```
@@ -119,4 +148,10 @@ Notes:
 
 [Your judgement]
 Respond in JSON format. {"REASONING": "[...]", "SCORE": "<your-score>"}
+```
+
+## DeepSeek R1
+### Template for DeepSeek-R1-Zero. prompt will be replaced with the specific reasoning question during training
+```
+A conversation between User and Assistant. The user asks a question, and the Assistant solves it. The assistant first thinks about the reasoning process in the mind and then provides the user with the answer. The reasoning process and answer are enclosed within <think> </think> and <answer> </answer> tags, respectively, i.e., <think> reasoning process here </think> <answer> answer here </answer>. User: prompt. Assistant:
 ```
