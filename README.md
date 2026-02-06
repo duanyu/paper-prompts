@@ -1,4 +1,232 @@
 # paper-prompts
+
+## Reverse-Engineered Reasoning for Open-Ended Generation
+
+### Prompt for Generating Initial Thinking
+```
+You are an expert in many fields. Suppose you will give a specific final response, I need
+you to also write down the thought process behind this solution.
+Here is a task:
+{}
+Here is the solution you will create:
+{}
+Now, you need to write down the thinking process behind this solution, as if you are
+thinking aloud and brainstorming in the mind. The thinking process involves thoroughly
+exploring questions through a systematic long thinking process. This requires
+engaging in a comprehensive cycle of analysis, summarizing, exploration, reassessment,
+reflection, backtracing, and iteration to develop well-considered thinking process.
+Present your complete thought process within a single and unique ‘<think></think>‘ tag
+.
+Your thought process must adhere to the following requirements:
+1. **Narrate in the first-person as if you are thinking aloud and brainstorming**
+Stick to the narrative of "I". Imagine you are brainstorming and thinking in the mind.
+Use verbalized, simple language.
+2. **Unify the thinking process and the writing solution:**
+Your thought process must precisely correspond to a part of the writing solution. The
+reader should be able to clearly see how your thoughts progressively "grew" into the
+finished piece, making the copy feel like the inevitable product of your thinking.
+3. **Tone of Voice: Planning, Sincere, Natural, and Accessible**
+Imagine you are analyzing and planning what to do before you start to wrtie the
+solution. Your language should be plain and easy to understand, avoiding obscure
+professional jargon to explain complex thought processes clearly.
+4. **Logical Flow: Clear and Progressive**
+5. **Thinking Framework for deep thinking**
+To ensure your thinking is clear and deep, to showcase your thinking and planning to
+fulfill the task, below is what you might cover when you are thinking aloud and
+brainstorming.
+Understanding the user intent and the task: Before putting pen to paper, I need to
+thoroughly consider the fundamental purpose of the writing. I first need to discern
+the user’s true goal behind their literal request. Next, I will consider: Who am I
+talking to? I will create a precise profile of the target reader, understanding their
+pain points, aspirations, and reading context. Then, I will establish the Core
+Objective: What specific emotional, cognitive, and behavioral changes do I most want
+the reader to experience after reading?
+Establishing the content: I need to brainstorm a core creative idea and communication
+strategy centered around my objective. Then, I will think about what content and key
+information I need to convey to the reader to fulfill the writing task, and what
+source materials this will involve.
+Building the structure: I need to design a clear narrative path for the reader, like
+a "blueprint." First, I will plan the article’s skeleton (e.g., using a framework like
+the Golden Circle "Why-How-What," the AIDA model "Attention-Interest-Desire-Action,"
+or a narrative structure "Beginning-Development-Climax-Resolution"). Then, I will plan
+the key modules: How will the introduction hook the reader? How will the body be
+layered and the arguments arranged? How will the conclusion summarize, elevate the
+message, and provide a clear Call to Action (CTA)?
+Outline: If the task output might be relatively long, I will consider writing an
+outline (or a draft) which naturally derives from the plan above. Specifically, the
+outline will ground my plan into paragraphs, summarizing the key content for each
+paragraph and what are the key points here, sentence structure or anything important
+for the paragraph.
+I PROMISE I will NOT copy the solution I will NOT copy the solution, this outline (or
+draft) should only look like a prototype or outline of the target text. After
+finishing this outline, I will check again if there are any details or notes I should
+pay attention to when writing the final solution.
+I will begin writing this draft after a ‘--- Outline (or Draft) ---‘ separator at the
+end of my thinking process. The draft will be included in the same ‘<think></think>‘
+block.
+6. Throughout the thinking process, I want to involve deep thinking and planning, and use
+deliberate self-critique/self-reflection in my thinking process. Trigger these by
+regularly using patterns such as ‘wait‘, ‘maybe‘, ‘let me‘, etc. For example:
+- Hmm, maybe .. (other concrete thinking regarding the given request)
+- Let me think ..
+- Wait no ..
+- But wait ..(might find something wrong with your previous thoughts)
+- Wait, that’s a bit ..(reflections about previous decisions). Let me think .. (are
+thinking of other possibilities)
+- Wait, the user said ..(backtracing of previous information). So ..
+- Hmm...Alternatively, maybe ..(branching on other possibilities)
+- But ..
+But I promise I will use diverse triggers and will NOT use same triggers repeatedly. I
+will use these when analyzing user needs, establishing content and structure and when
+I consider alternatives, backtracing and the details. I will NOT use them when I write
+the draft or I am approaching the end of thinking.
+In the thinking process, make sure NO PAST TENSES, NO PAST TENSES, because this is the
+thought process before you are to write a final solution. You are planning what you
+will and you need to do.
+Imagine you’re thinking aloud and brainstorming. Write it as an internal monologue or a
+stream of consciousness. Do not use bullet points, numbers, or formal section headings
+.
+Now record your thinking process within ‘<think></think>‘ tags.
+```
+
+### Prompt for Rating Response Quality w.r.t. Deep Reasoning
+```
+You are an expert judge in AI generated content. Your primary task is to assess an AI
+model’s response, specifically focusing on its ability to perform **deep thinking and
+planning**. You will evaluate the response across five distinct dimensions. A model
+that excels at deep thinking will not only provide a correct answer but will
+demonstrate a structured, logical, and well-grounded reasoning process from start to
+finish.
+Your final output must be a structured report with a score and justification for each
+dimension.
+-----
+## Evaluation Dimensions & Scoring
+### 1\. Understanding & Problem Decomposition
+**Relation to Deep Thinking:** This is the foundational step. Deep thinking is impossible
+without first accurately understanding the problem in its entirety. This dimension
+measures if the model comprehends the user’s explicit and implicit needs and then
+breaks down the complex request into manageable, logical parts. This act of
+decomposition *is* the first stage of planning.
+* **Score 1 (Poor):** The model fundamentally misunderstands the user’s request or
+ignores key components. The response is off-topic or fails to address the core problem
+.
+* **Score 3 (Average):** The model grasps the main goal but may overlook nuances or
+implicit constraints. It attempts to break down the problem, but the decomposition may
+be incomplete or slightly illogical.
+* **Score 5 (Excellent):** The model demonstrates a comprehensive understanding of the
+user’s intent, including subtle details. It expertly deconstructs the problem into a
+clear, exhaustive, and actionable framework.
+Score 2 and Score 4 fit interpolate into the above scoring criterion.
+-----
+### 2\. Content Structure & Logical Consistency
+**Relation to Deep Thinking:** This dimension reflects the clarity and order of the model’
+s thought process. A deep, well-considered plan has a coherent structure where ideas
+flow logically and conclusions are built upon valid premises. Inconsistencies or a
+chaotic structure indicate shallow, stream-of-consciousness generation rather than
+deliberate planning.
+* **Score 1 (Poor):** The response is disorganized, rambling, or internally
+contradictory. It’s difficult to follow the model’s line of reasoning.
+* **Score 3 (Average):** The response has a discernible structure (e.g., uses headings,
+lists), but the flow between sections could be improved. It is mostly consistent,
+with only minor logical gaps.
+* **Score 5 (Excellent):** The response is impeccably structured. Each part logically
+follows from the previous one, building a coherent and compelling argument or plan.
+The internal logic is sound and easy to follow from beginning to end.
+Score 2 and Score 4 interpolate into the above scoring criterion.
+-----
+### 3\. Depth of Analysis & Synthesis
+**Relation to Deep Thinking:** This is the core of "deep thinking." It goes beyond simply
+retrieving facts and measures the model’s ability to analyze underlying principles,
+connect disparate ideas, and synthesize them to create new insights. A simple plan
+lists steps; a deeply thought-out plan explains *why* those are the right steps and
+how they interrelate.
+* **Score 1 (Poor):** The response is superficial, relying on cliches or surface-level
+information. It shows no evidence of analyzing the "why" behind the "what."
+* **Score 3 (Average):** The model provides a competent analysis, explaining concepts
+correctly but treating them in isolation. It lacks the synthesis needed to create a
+novel or holistic perspective.
+* **Score 5 (Excellent):** The model provides a profound analysis, connecting concepts
+in insightful ways. It synthesizes information to offer a nuanced perspective that is
+more than the sum of its parts, demonstrating a true grasp of the subject matter.
+Score 2 and Score 4 interpolate into the above scoring criterion.
+-----
+### 4\. Presentation Clarity
+**Relation to Deep Thinking:** A brilliant plan is useless if it cannot be understood.
+This dimension assesses the model’s ability to communicate its complex thoughts and
+plans effectively. Clarity in presentation demonstrates a higher level of
+understanding, as the model must distill its reasoning into a format that is concise,
+accessible, and actionable for the user.
+* **Score 1 (Poor):** The response is convoluted, filled with jargon, or poorly
+formatted. The user would struggle to understand the main points or how to act on the
+advice.
+* **Score 3 (Average):** The response is generally understandable but could be more
+concise or better organized. It may be overly dense or require the user to re-read
+sections to grasp the meaning.
+* **Score 5 (Excellent):** The response is exceptionally clear, concise, and wellformatted. It uses plain language and effective formatting (like lists, bolding, or
+tables) to make complex information easy to digest and act upon.
+Score 2 and Score 4 interpolate into the above scoring criterion.
+-----
+### 5\. Factual Grounding (Hallucination Check)
+**Relation to Deep Thinking:** Deep thinking and planning must be grounded in reality to
+be useful. A plan built on fabricated information ("hallucinations") is fundamentally
+flawed and demonstrates a critical failure in the reasoning process. This dimension
+acts as a crucial check on the validity of the model’s entire output.
+*This dimension is scored on a severity scale, not a quality scale.*
+* **Score 4 (Factually Sound):** The response contains no discernible factual errors or
+hallucinations.
+* **Score 3 (Minor Inaccuracy):** Contains a small error (e.g., a slightly incorrect
+date, a minor misstatement) that does not undermine the overall logic or conclusion of
+the response.
+* **Score 2 (Significant Hallucination):** Contains a major factual error that
+invalidates a key part of the argument or plan. The response is partially unreliable.
+* **Score 0 (Critical Hallucination):** The core premise or a critical component of the
+response is based on a fabrication, rendering the entire output untrustworthy and
+potentially harmful.
+Score 1 interpolates into the above scoring criterion.
+-----
+## Final Output Format
+Please provide your evaluation in the following structured json format.
+‘‘‘json
+{
+"evaluationReport": {
+"understandingAndDecomposition": {
+"score": "[Enter a score from 1-5]",
+"justification": "[Your justification here. Explain why you gave this score.]"
+},
+"structureAndConsistency": {
+"score": "[Enter a score from 1-5]",
+"justification": "[Your justification here. Explain why you gave this score.]"
+},
+"depthOfAnalysis": {
+"score": "[Enter a score from 1-5]",
+"justification": "[Your justification here. Explain why you gave this score.]"
+},
+"presentationClarity": {
+"score": "[Enter a score from 1-5]",
+"justification": "[Your justification here. Explain why you gave this score.]"
+},
+"factualGrounding": {
+"severityScore": "[Enter a severity score from 1-5]",
+"justification": "[Describe any inaccuracies or hallucinations found. If none,
+state ’Response is factually sound.’]"
+},
+"overallSummary": "[Provide a final, concise paragraph summarizing the model’s
+overall performance in deep thinking and planning. A response with a Hallucination
+Severity Score of 2 or 3 cannot be considered a high-quality example of planning,
+regardless of other scores.]"
+}
+}
+----
+<User Request>
+$INST$
+</User Request>
+<Response>
+$RESPONSE$
+</Response>
+----
+Now go back to the evaluation guideline and give the json report."""
+```
+
 ## Tulu3 
 LLM-as-a-judge prompt to annotate preference-tuning dataset
 
