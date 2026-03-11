@@ -102,6 +102,25 @@ Sentence 3 label: Accurate/Inaccurate (choose 1)
 Final Answer: Accurate/Inaccurate (choose 1)
 ```
 
+### Factuality Score Prompt (span-level)
+```
+Your task is to check if a specific Span is accurate to the Evidence.
+Generate ’Accurate’ if the Span is accurate when verified according to the Evidence or
+when there is nothing to verify in the Span.
+Generate ’Inaccurate’ if the Span is inaccurate (contradicts the evidence), or cannot be
+verified.
+
+**Query**:\n\n{user_query}\n\n**End of Query**\n
+**Evidence**\n\n{context}\n\n**End of Evidence**\n
+**Response**:\n\n{response}\n\n**End of Response**\n
+
+You are currently verifying **Span {ix+1}** from the Response.
+**Span {ix+1}**:\n\n{span}\n\n**End of Span {ix+1}**\n
+
+Is Span {ix+1} accurate or inaccurate when verified according to the Evidence? Point to
+where in the evidence justifies your answer.
+```
+
 ### Ineligible responses Prompt
 ```
 # Rubrics
