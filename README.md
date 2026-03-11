@@ -82,12 +82,15 @@ Your task is to check if the Response is accurate to the Evidence.
 Generate ’Accurate’ if the Response is accurate when verified according to the Evidence,
 or ’Inaccurate’ if the Response is inaccurate (contradicts the evidence) or cannot be
 verified.
+
 **Query**:\n\n{user_query}\n\n**End of Query**\n
 **Evidence**\n\n{context}\n\n**End of Evidence**\n
 **Response**:\n\n{response}\n\n**End of Response**\n
+
 Break down the Response into sentences and classify each one separately, then give the
 final answer: If even one of the sentences is inaccurate, then the Response is
 inaccurate.
+
 For example, your output should be of this format:
 Sentence 1: <Sentence 1>
 Sentence 1 label: Accurate/Inaccurate (choose 1)
